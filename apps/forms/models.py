@@ -9,10 +9,8 @@ class Forms(models.Model):
     """
     考评表模板
     """
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100, verbose_name="考评表名称", help_text='商品名称')
-    points1 = models.CharField(max_length=32, null=True, blank=True, verbose_name="扣分点1")
-    reason1 = models.CharField(max_length=200, null=True, blank=True, verbose_name="扣分原因1")
+    # id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=400, verbose_name="考评表名称", help_text='考评表名称')
     add_time = models.DateTimeField(auto_now_add=True, verbose_name='添加时间')
 
     class Meta:
@@ -22,3 +20,19 @@ class Forms(models.Model):
 
     def __str__(self):
         return self.name
+
+class Points(models.Model):
+    """
+    扣分表
+    """
+    # id = models.AutoField(primary_key=True)
+    forms = models.ForeignKey(to="Forms", verbose_name="关联考评表", on_delete=models.PROTECT, db_constraint=False, null=True, blank=True, help_text="关联考评表")
+    points = models.CharField(max_length=800, null=True, blank=True, verbose_name="扣分点")
+
+    class Meta:
+        db_table = "table_points"
+        verbose_name_plural = verbose_name = '扣分点'
+        # ordering = ("-create_datetime",)
+
+    def __str__(self):
+        return self.points

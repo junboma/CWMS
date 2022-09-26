@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'forms.apps.FormsConfig',
     'report.apps.ReportConfig',
+    # 安装django-import-export
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -144,11 +146,13 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = 'users.UserProfile'  # 使用自定义的models做认证
-
+# AUTH_USER_MODEL = 'users.UserProfile'  # 使用自定义的models做认证
+AUTH_USER_MODEL = 'users.NewUser'
 # 配置媒体文件
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # 配置富文本上传路径
 CKEDITOR_UPLOAD_PATH = 'upload/'
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
